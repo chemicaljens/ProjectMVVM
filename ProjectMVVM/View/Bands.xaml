@@ -14,7 +14,7 @@
 
         <DataTemplate x:Key="GenreTemp">
             <StackPanel>
-                <CheckBox Margin="4">
+                <CheckBox IsChecked="{Binding checkgenre}" Margin="4">
                     <TextBox Text="{Binding Name}" />
                 </CheckBox>
             </StackPanel>
@@ -56,7 +56,7 @@
                 Command="{Binding DeleteBandsCommand}"
                 />
         <Label Content="Logo:" HorizontalAlignment="Left" Height="57" Margin="493,447,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
-        <ListBox HorizontalAlignment="Left" Height="256" Margin="1045,65,0,0" VerticalAlignment="Top" Width="454"
+        <ListBox HorizontalAlignment="Left" Height="256" Margin="1045,69,0,0" VerticalAlignment="Top" Width="454"
                  ItemsSource="{Binding Genres}" 
                  ItemTemplate="{StaticResource GenreTemp}"
                  />
