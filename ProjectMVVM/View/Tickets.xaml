@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="ProjectMVVM.View.TicketsVM"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1600">
+    <UserControl.Resources>
+        <DataTemplate x:Key="TicketTypeTemp">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Name}" Margin="4"/>
+                <TextBox Text="{Binding Price}" Margin="4"/>
+                <TextBox Text="{Binding AvailableTickets}" Margin="4"/>
+            </StackPanel>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="TicketTemp">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding user.Login}" Margin="4"/>
+                <TextBlock Text="{Binding Tickettype.Name}" Margin="4"/>
+                <TextBlock Text="{Binding Amount}" Margin="4"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="UsersTemp">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FirstName}" Margin="4"/>
+                <TextBlock Text="{Binding Name}" Margin="4"/>
+                <TextBlock Text="{Binding BirthDay}"  Margin="4"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel>
+                <Border BorderBrush="Red" BorderThickness="3">
+                    <AdornedElementPlaceholder>
+                    </AdornedElementPlaceholder>
+                </Border>
+                <TextBlock Foreground="Red" Text="{Binding [0].ErrorContent}"/>
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <ListBox HorizontalAlignment="Left" Height="320" Margin="29,483,0,0" VerticalAlignment="Top" Width="705"               
+                 ItemsSource="{Binding Tickets}" 
+                 ItemTemplate="{StaticResource TicketTemp}"
+                 SelectedItem="{Binding SelectedTickets}"/>
+        <Label Content="Kopers:" HorizontalAlignment="Left" Height="56" Margin="1126,12,0,0" VerticalAlignment="Top" Width="106" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="56" Margin="1250,12,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="186" FontSize="26.667"/>
+        <Button Content="Search" HorizontalAlignment="Left" Height="56" Margin="1458,10,0,0" VerticalAlignment="Top" Width="115" FontSize="26.667"/>
+        <Button Content="Wijzig" HorizontalAlignment="Left" Height="56" Margin="1403,834,0,0" VerticalAlignment="Top" Width="170" FontSize="26.667"
+                Command="{Binding SaveUserCommand}"
+                />
+        <Button Content="Verwijder" HorizontalAlignment="Left" Height="56" Margin="1123,834,0,0" VerticalAlignment="Top" Width="192" FontSize="26.667"
+                 Command="{Binding DeleteUserCommand}"
+                />
+        <ListBox HorizontalAlignment="Left" Height="295" Margin="27,73,0,0" VerticalAlignment="Top" Width="709"
+                 ItemsSource="{Binding TicketTypes}" 
+                 ItemTemplate="{StaticResource TicketTypeTemp}"
+                 SelectedItem="{Binding SelectedTicketType}"/>
+        <Label Content="Ticket Types:" HorizontalAlignment="Left" Height="56" Margin="29,10,0,0" VerticalAlignment="Top" Width="176" FontSize="26.667"/>
+        <Button Content="Wijzig" HorizontalAlignment="Left" Height="56" Margin="534,387,0,0" VerticalAlignment="Top" Width="200" FontSize="26.667"
+                Command="{Binding SaveTicketTypesCommand}"
+                />
+        <Button Content="Verwijder" HorizontalAlignment="Left" Height="56" Margin="285,387,0,0" VerticalAlignment="Top" Width="200" FontSize="26.667"
+                Command="{Binding DeleteTicketTypesCommand}"
+                />
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Height="56" Margin="27,387,0,0" VerticalAlignment="Top" Width="200" FontSize="26.667"
+                Command="{Binding AddNewTicketTypesCommand}"
+                />
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Height="56" Margin="841,834,0,0" VerticalAlignment="Top" Width="199" FontSize="26.667"
+        	Command="{Binding AddNewUserCommand}"
+                />
+        <Label Content="Login:" HorizontalAlignment="Left" Height="48" Margin="841,579,0,0" VerticalAlignment="Top" Width="256" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="59" Margin="841,627,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="322" FontSize="26.667" 
+        	Text="{Binding SelectedUser.Login, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" />
+        <Label Content="Geboorte Datum:" HorizontalAlignment="Left" Height="51" Margin="841,694,0,0" VerticalAlignment="Top" Width="256" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="59" Margin="841,513,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="322" FontSize="26.667" 
+        	Text="{Binding SelectedUser.Name, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <Label Content="Naam:" HorizontalAlignment="Left" Height="47" Margin="841,466,0,0" VerticalAlignment="Top" Width="256" FontSize="26.667"/>
+        <Label Content="Voornaam:" HorizontalAlignment="Left" Height="48" Margin="1250,465,0,0" VerticalAlignment="Top" Width="260" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="1250,513,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" FontSize="26.667" 
+        	Text="{Binding SelectedUser.FirstName, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" />
+        <Label Content="Password:" HorizontalAlignment="Left" Height="48" Margin="1250,583,0,0" VerticalAlignment="Top" Width="260" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="1250,631,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" FontSize="26.667"
+        	Text="{Binding SelectedUser.Password, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Height="48" Margin="1250,696,0,0" VerticalAlignment="Top" Width="260" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="62" Margin="1250,744,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="327" FontSize="26.667"
+        	Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <Button Content="Wijzig" HorizontalAlignment="Left" Height="56" Margin="571,834,0,0" VerticalAlignment="Top" Width="160" FontSize="26.667"
+        	Command="{Binding SaveTicketsCommand}"
+                />
+        <Button Content="Verwijder" HorizontalAlignment="Left" Height="56" Margin="309,834,0,0" VerticalAlignment="Top" Width="181" FontSize="26.667"
+        	Command="{Binding DeleteTicketsCommand}"
+                />
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Height="56" Margin="32,834,0,0" VerticalAlignment="Top" Width="186" FontSize="26.667"
+        	Command="{Binding AddNewTicketsCommand}"
+                />
+        <ListBox HorizontalAlignment="Left" Height="370" Margin="841,73,0,0" VerticalAlignment="Top" Width="733"               
+        	ItemsSource="{Binding Users}" 
+        	ItemTemplate="{StaticResource UsersTemp}"
+        	SelectedItem="{Binding SelectedUser}"/>
+        <DatePicker HorizontalAlignment="Left" Height="53" Margin="841,750,0,0" VerticalAlignment="Top" Width="322" FontSize="26.667"
+        	SelectedDate="{Binding SelectedUser.BirthDay}"
+                     />
+    </Grid>
+</UserControl>

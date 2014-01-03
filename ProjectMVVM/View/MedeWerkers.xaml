@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="ProjectMVVM.View.MedeWerkers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="900
+             " d:DesignWidth="1600">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ContactTemp">
+            <StackPanel>
+                <TextBlock Text="{Binding Name}" Margin="4"/>
+            </StackPanel>
+        </DataTemplate>
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel>
+                <Border BorderBrush="Red" BorderThickness="3">
+                    <AdornedElementPlaceholder>
+                    </AdornedElementPlaceholder>
+                </Border>
+                <TextBlock Foreground="Red" Text="{Binding [0].ErrorContent}"/>
+            </StackPanel>
+        </ControlTemplate>
+
+    </UserControl.Resources>
+    <Grid Margin="-2,2,2,-2">
+        <ListBox HorizontalAlignment="Left" Height="727" Margin="10,80,0,0" VerticalAlignment="Top" Width="632"
+                 ItemsSource="{Binding Contactpersons}" 
+                 ItemTemplate="{StaticResource ContactTemp}"
+                 SelectedItem="{Binding SelectedContactperson}"/>
+        <Label Content="MedeWerkers:" HorizontalAlignment="Left" Height="51" Margin="10,10,0,0" VerticalAlignment="Top" Width="314" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="56" Margin="336,10,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="186" FontSize="26.667"/>
+        <Button Content="Zoek" HorizontalAlignment="Left" Height="56" Margin="527,10,0,0" VerticalAlignment="Top" Width="115" FontSize="26.667"/>
+        <Label Content="Adres:" HorizontalAlignment="Left" Height="46" Margin="688,298,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="688,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667" 
+                 Text="{Binding SelectedContactperson.Address, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" />
+        <Label Content="Stad" HorizontalAlignment="Left" Height="50" Margin="688,409,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="688,459,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667" 
+                 Text="{Binding SelectedContactperson.City, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="688,234,-433.6,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372.8" FontSize="26.667" 
+                 Text="{Binding SelectedContactperson.Name, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <ComboBox HorizontalAlignment="Left" Height="57" Margin="1130,234,0,0" VerticalAlignment="Top" Width="431"  
+                       ItemsSource="{Binding ContactpersonTypes}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedContactperson.JobRole, ValidatesOnDataErrors=True}"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding SelectedContactperson.JobRole.Id}"
+                  Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                  />
+        <Label Content="Functie:" HorizontalAlignment="Left" Height="46.8" Margin="1129.6,182.2,-798.4,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <Label Content="Foto:" HorizontalAlignment="Left" Height="56" Margin="1130,435,0,0" VerticalAlignment="Top" Width="235" FontSize="26.667"/>
+        <Image x:Name="imgLogo_Copy" HorizontalAlignment="Left" Height="367" Margin="1130,521,0,0" VerticalAlignment="Top" Width="431"/>
+        <Label Content="Naam:" HorizontalAlignment="Left" Height="47" Margin="688,187,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <Label Content="Telefoon NR:" HorizontalAlignment="Left" Height="50" Margin="688,521,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="688,571,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667" 
+                 Text="{Binding SelectedContactperson.Phone, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" />
+        <Label Content="Bedrijf:" HorizontalAlignment="Left" Height="46" Margin="1130,298,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="1130,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="431" FontSize="26.667" 
+                 Text="{Binding SelectedContactperson.Company, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <Label Content="GSM NR:" HorizontalAlignment="Left" Height="50" Margin="688,641,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="688,691,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667"
+                 Text="{Binding SelectedContactperson.CellPhone, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Height="50" Margin="688,757,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="688,807,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667"
+                 Text="{Binding SelectedContactperson.Email, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <Button Content="toevoegen" HorizontalAlignment="Left" Height="56" Margin="10,834,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
+                Command="{Binding AddNewContactpersonsCommand}"
+                />
+        <Button Content="Verwijderen" HorizontalAlignment="Left" Height="56" Margin="481,834,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
+                Command="{Binding DeleteContactpersonsCommand}"
+                />
+        <Button Content="Wijzig" HorizontalAlignment="Left" Height="56" Margin="1412,832,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
+                Command="{Binding SaveContactpersonsCommand}"
+                />
+        <Button Content="Laad in" HorizontalAlignment="Left" Height="56" Margin="1400,435,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
+                Command="{Binding LogoCommand}"
+                />
+    </Grid>
+</UserControl>

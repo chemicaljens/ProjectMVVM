@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="ProjectMVVM.View.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignWidth="1600" Height="900">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel>
+                <Border BorderBrush="Red" BorderThickness="3">
+                    <AdornedElementPlaceholder>
+                    </AdornedElementPlaceholder>
+                </Border>
+                <TextBlock Foreground="Red" Text="{Binding [0].ErrorContent}"/>
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Label Content="Startdag:" HorizontalAlignment="Left" Height="46" Margin="8,118,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <DatePicker HorizontalAlignment="Left" Height="40" Margin="10,164,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"
+                    SelectedDate="{Binding SelectedFestival.StarDate}"
+                    />
+        <Label Content="Einde" HorizontalAlignment="Left" Height="38" Margin="8,208,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <DatePicker HorizontalAlignment="Left" Height="40" Margin="8,246,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"
+                    SelectedDate="{Binding SelectedFestival.EndDate}"
+                     />
+        <Label Content="Naam:" HorizontalAlignment="Left" Height="45" Margin="8,16,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <TextBox HorizontalAlignment="Left" Height="57" Margin="10,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="296" FontSize="26.667"
+                 Text="{Binding SelectedFestival.Name}"
+                 />
+        <Label Content="Logo:" HorizontalAlignment="Left" Height="57" Margin="10,347,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <Image x:Name="imgLogo" HorizontalAlignment="Left" Height="350" Margin="20,404,0,0" VerticalAlignment="Top" Width="350"
+               Source="{Binding SelectedFestival.Logo}"
+               
+               />
+        <Label Content="grondplan:" HorizontalAlignment="Left" Height="57" Margin="424,16,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
+        <Image x:Name="imgGrondplan" HorizontalAlignment="Left" Height="742" Margin="435,66,0,0" VerticalAlignment="Top" Width="1117"
+               Source="{Binding SelectedFestival.Grondplan}"
+               />
+        <Button Content="Wijzig" HorizontalAlignment="Left" Height="56" Margin="1390,838,0,0" VerticalAlignment="Top" Width="162" FontSize="26.667"
+        	Command="{Binding SavefestivalCommand}"
+                />
+        <Button Content="Laad:" HorizontalAlignment="Left" Height="56" Margin="424,838,0,0" VerticalAlignment="Top" Width="162" FontSize="26.667"
+        	Command="{Binding GrondplanCommand}"
+                />
+        <Button Content="Laad:" HorizontalAlignment="Left" Height="56" Margin="20,838,0,0" VerticalAlignment="Top" Width="162" FontSize="26.667"
+        	Command="{Binding LogoCommand}"
+                />
+    </Grid>
+</UserControl>
