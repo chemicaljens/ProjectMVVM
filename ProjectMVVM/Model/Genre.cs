@@ -27,7 +27,7 @@ namespace ProjectMVVM.Model
                 Genre anieuw = new Genre();
                 anieuw.Id = Int32.Parse(reader["Id"].ToString());
                 anieuw.Name = reader["Genre"].ToString();
-                anieuw.checkgenre = false;
+                anieuw.checkgenre = true;
 
                 lijst.Add(anieuw);
             }

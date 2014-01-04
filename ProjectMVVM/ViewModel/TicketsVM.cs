@@ -207,6 +207,8 @@ namespace ProjectMVVM.ViewModel
             Ticket anieuw = new Ticket();
 
             SelectedTicket = anieuw;
+            anieuw.Tickettype = SelectedTicketType;
+            anieuw.user = SelectedUser;
             Tickets.Add(anieuw);
         }
 
@@ -247,6 +249,7 @@ namespace ProjectMVVM.ViewModel
             {
                 Ticket.SaveNewTicket(SelectedTicket);
                 Tickets = Ticket.getTickets();
+
             }
 
         }
@@ -288,7 +291,6 @@ namespace ProjectMVVM.ViewModel
             Users.Remove(SelectedUser);
         }
 
-
         public ICommand DeleteUserCommand
         {
             get
@@ -302,7 +304,7 @@ namespace ProjectMVVM.ViewModel
 
         private void SaveUser()
         {
-            if (SelectedTicket.Id != 0)
+            if (SelectedUser.Id != 0)
             { User.SaveUser(SelectedUser); }
             else
             {

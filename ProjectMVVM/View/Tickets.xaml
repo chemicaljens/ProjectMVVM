@@ -8,26 +8,26 @@
     <UserControl.Resources>
         <DataTemplate x:Key="TicketTypeTemp">
             <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding Name}" Margin="4"/>
-                <TextBox Text="{Binding Price}" Margin="4"/>
-                <TextBox Text="{Binding AvailableTickets}" Margin="4"/>
+                <TextBox Text="{Binding Name}" Margin="4" Width="150"/>
+                <TextBox Text="{Binding Price}" Margin="4" Width="150"/>
+                <TextBox Text="{Binding AvailableTickets}" Margin="4" Width="150"/>
             </StackPanel>
 
         </DataTemplate>
 
         <DataTemplate x:Key="TicketTemp">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding user.Login}" Margin="4"/>
-                <TextBlock Text="{Binding Tickettype.Name}" Margin="4"/>
-                <TextBlock Text="{Binding Amount}" Margin="4"/>
+                <TextBlock Text="{Binding user.Login}" Margin="4" Width="150"/>
+                <TextBlock Text="{Binding Tickettype.Name}" Margin="4" Width="150"/>
+                <TextBox Text="{Binding Amount}" Margin="4" Width="150"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="UsersTemp">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding FirstName}" Margin="4"/>
-                <TextBlock Text="{Binding Name}" Margin="4"/>
-                <TextBlock Text="{Binding BirthDay}"  Margin="4"/>
+                <TextBlock Text="{Binding FirstName}" Margin="4" Width="150"/>
+                <TextBlock Text="{Binding Name}" Margin="4" Width="150"/>
+                <TextBlock Text="{Binding BirthDay}"  Margin="4" Width="150"/>
             </StackPanel>
         </DataTemplate>
 
@@ -46,7 +46,7 @@
         <ListBox HorizontalAlignment="Left" Height="320" Margin="29,483,0,0" VerticalAlignment="Top" Width="705"               
                  ItemsSource="{Binding Tickets}" 
                  ItemTemplate="{StaticResource TicketTemp}"
-                 SelectedItem="{Binding SelectedTickets}"/>
+                 SelectedItem="{Binding SelectedTicket}"/>
         <Label Content="Kopers:" HorizontalAlignment="Left" Height="56" Margin="1126,12,0,0" VerticalAlignment="Top" Width="106" FontSize="26.667"/>
         <TextBox HorizontalAlignment="Left" Height="56" Margin="1250,12,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="186" FontSize="26.667"/>
         <Button Content="Search" HorizontalAlignment="Left" Height="56" Margin="1458,10,0,0" VerticalAlignment="Top" Width="115" FontSize="26.667"/>

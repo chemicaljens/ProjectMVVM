@@ -60,7 +60,7 @@
                  ItemsSource="{Binding Genres}" 
                  ItemTemplate="{StaticResource GenreTemp}"
                  />
-        <Image HorizontalAlignment="Left" Height="294" Margin="493,546,0,0" VerticalAlignment="Top" Width="487"
+        <Image HorizontalAlignment="Left" Height="294" Margin="493,535,0,0" VerticalAlignment="Top" Width="487"
                Source="{Binding SelectedBand.Picture}"
                />
         <Label Content="Twitter:" HorizontalAlignment="Left" Height="49" Margin="491,146,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
@@ -71,11 +71,14 @@
         <TextBox HorizontalAlignment="Left" Height="57" Margin="493,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667"
                  Text="{Binding SelectedBand.Facebook, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
                  />
-        <Button Content="Opslaan" HorizontalAlignment="Left" Height="55" Margin="1317,834,0,0" VerticalAlignment="Top" Width="192" FontSize="26.667"
+        <Button Content="Opslaan" HorizontalAlignment="Left" Height="55" Margin="1307,834,0,0" VerticalAlignment="Top" Width="192" FontSize="26.667"
                 Command="{Binding SaveBandsCommand}"
                 />
         <Button Content="Laad:" HorizontalAlignment="Left" Height="55" Margin="786,447,0,0" VerticalAlignment="Top" Width="192" FontSize="26.667"
         	Command="{Binding LogoCommand}"
+                />
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Height="55" Margin="1307,5,0,0" VerticalAlignment="Top" Width="192" FontSize="26.667"
+        	Command="{Binding AddNewGenreCommand}"
                 />
     </Grid>
 </UserControl>

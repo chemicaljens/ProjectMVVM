@@ -59,10 +59,10 @@ namespace ProjectMVVM.Model
 
             DbParameter par1 = Database.AddParameter("@NAME", nieuwUser.Name);
             DbParameter par2 = Database.AddParameter("@Firstname", nieuwUser.FirstName);
-            DbParameter par3 = Database.AddParameter("@Email", nieuwUser.FirstName);
-            DbParameter par4 = Database.AddParameter("@Login", nieuwUser.FirstName);
-            DbParameter par5 = Database.AddParameter("@Password", nieuwUser.FirstName);
-            DbParameter par6 = Database.AddParameter("@BirthDay", nieuwUser.FirstName);
+            DbParameter par3 = Database.AddParameter("@Email", nieuwUser.Email);
+            DbParameter par4 = Database.AddParameter("@Login", nieuwUser.Login);
+            DbParameter par5 = Database.AddParameter("@Password", nieuwUser.Password);
+            DbParameter par6 = Database.AddParameter("@BirthDay", nieuwUser.BirthDay);
 
             if (par1.Value == null) par1.Value = DBNull.Value;
             try
@@ -70,8 +70,7 @@ namespace ProjectMVVM.Model
                 Database.ModifyData(SQL, par1, par2, par3, par4, par5, par6);
             }
             catch (Exception)
-            {
-                
+            {           
                 throw;
             }
             

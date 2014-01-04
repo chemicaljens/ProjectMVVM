@@ -35,7 +35,6 @@ namespace ProjectMVVM.ViewModel
         {
             get
             {
-
                 return _Genres;
             }
 
@@ -46,19 +45,35 @@ namespace ProjectMVVM.ViewModel
             }
         }
 
+        private Genre _GenreSelected;
+        public Genre SelectedGenre
+        {
+            get
+            {
+
+                return _GenreSelected;
+            }
+            set
+            {
+                _GenreSelected = value;
+                OnPropertyChanged("SelectedGenre");
+            }
+        }
+
         private Band _BandsSelected;
         public Band SelectedBand
         {
             get
             {
-
                 return _BandsSelected;
             }
             set
             {
 
                 _BandsSelected = value;
-                if (_BandsSelected!=null)
+
+                //controleert welke genres er aan de band hangen.
+                if (_BandsSelected.Name!=null)
                 {
                     foreach (Genre genreg in Genres)
                     {
@@ -71,11 +86,13 @@ namespace ProjectMVVM.ViewModel
                             if (genre.Id == genreg.Id)
                             {
                                 genreg.checkgenre = true;
+                                genreg.Name = genreg.Name + "1";
                             }
                         }
                     }
                 }
 
+                OnPropertyChanged("Genres");
                 OnPropertyChanged("SelectedBand");
             }
 
@@ -113,9 +130,9 @@ namespace ProjectMVVM.ViewModel
         private void AddNewBands()
         {
             Band anieuw = new Band();
-
-            SelectedBand = anieuw;
             Bands.Add(anieuw);
+            SelectedBand = anieuw;
+            
         }
 
         public ICommand SaveBandsCommand
@@ -197,6 +214,25 @@ namespace ProjectMVVM.ViewModel
                 }
             }
 
+        }
+
+        public ICommand AddNewGenreCommand
+        {
+            get
+            {
+
+                return new RelayCommand(AddNewGenre);
+
+            }
+
+        }
+
+        private void AddNewGenre()
+        {
+            Genre anieuw = new Genre();
+
+            SelectedGenre = anieuw;
+            Genres.Add(anieuw);
         }
 
     }
