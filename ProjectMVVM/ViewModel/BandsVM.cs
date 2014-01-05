@@ -71,7 +71,7 @@ namespace ProjectMVVM.ViewModel
             {
 
                 _BandsSelected = value;
-
+                _Genres = Genre.getGenre();
                 //controleert welke genres er aan de band hangen.
                 if (_BandsSelected.Name!=null)
                 {
@@ -86,12 +86,10 @@ namespace ProjectMVVM.ViewModel
                             if (genre.Id == genreg.Id)
                             {
                                 genreg.checkgenre = true;
-                                genreg.Name = genreg.Name + "1";
                             }
                         }
                     }
                 }
-
                 OnPropertyChanged("Genres");
                 OnPropertyChanged("SelectedBand");
             }

@@ -53,5 +53,73 @@ namespace ProjectMVVM.Model
             }
             return Genrelijst;
         }
+
+        internal static void updateBandGenre(Band SelectedBand,ObservableCollection<Genre> genres)
+        {
+            String SQL = "DELETE From BandGenre where Band=@Band";
+            DbParameter par1 = Database.AddParameter("@Band", SelectedBand.Id);
+            if (par1.Value == null) par1.Value = DBNull.Value;
+            try
+            {
+                Database.ModifyData(SQL, par1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            foreach (Genre gen in genres)
+            {
+                if (gen.checkgenre == true)
+                {
+
+                    String SQL2 = "INSERT INTO BandGenre (Band,Genre)VALUES(@Band,@Genre)";
+                    DbParameter par11 = Database.AddParameter("@Band", SelectedBand.Id);
+                    DbParameter par12 = Database.AddParameter("@Genre", gen.Id);
+                    try
+                    {
+                        Database.ModifyData(SQL2, par11, par12);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public static void SaveGenre(Genre SelectedGenre)
+        {
+            String SQL = "Update Genre SET Genre=@Genre  Where Id=" + SelectedGenre.Id;
+            DbParameter par1 = Database.AddParameter("@Genre", SelectedGenre.Name);
+            try
+            {
+                Database.ModifyData(SQL, par1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static void SaveNewGenre(Genre nieuwGenre)
+        {
+
+            String SQL = "INSERT INTO Genre (Genre)VALUES(@Genre)";
+            DbParameter par1 = Database.AddParameter("@Genre", nieuwGenre.Name);
+            try
+            {
+                Database.ModifyData(SQL, par1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

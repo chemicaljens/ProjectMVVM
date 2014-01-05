@@ -55,7 +55,15 @@ namespace ProjectMVVM.ViewModel
 
         private void Savefestival()
         {
-            Festival.SaveFestival(SelectedFestival);
+            if (SelectedFestival.StarDate > SelectedFestival.EndDate)
+            {
+                System.Windows.Forms.MessageBox.Show("start datum komt voor eind datum.");
+            }
+            else {
+                Festival.SaveFestival(SelectedFestival);
+            }
+
+            
 
         }
 
