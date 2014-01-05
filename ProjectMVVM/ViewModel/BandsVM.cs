@@ -147,7 +147,9 @@ namespace ProjectMVVM.ViewModel
         private void SaveBands()
         {
             if (SelectedBand.Id != 0)
-            { Band.SaveBand(SelectedBand); }
+            { Band.SaveBand(SelectedBand);
+            Genre.updateBandGenre(SelectedBand, Genres);
+            }
             else
             {
                 Band.SaveNewBand(SelectedBand);
