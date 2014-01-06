@@ -57,7 +57,7 @@ namespace ProjectMVVM.Model
             DbParameter par2 = Database.AddParameter("@StartTime", nieuwLineUP.From);
             DbParameter par3 = Database.AddParameter("@EndTime", nieuwLineUP.Until);
             DbParameter par4 = Database.AddParameter("@Stage", nieuwLineUP.stage);
-            DbParameter par5 = Database.AddParameter("@Band", nieuwLineUP.band);
+            DbParameter par5 = Database.AddParameter("@Band", nieuwLineUP.band.Id);
             try
             {
                 Database.ModifyData(SQL, par1, par2, par3, par4, par5);
@@ -117,7 +117,7 @@ namespace ProjectMVVM.Model
             DbParameter par2 = Database.AddParameter("@StartTime", SelectedLineUp.From);
             DbParameter par3 = Database.AddParameter("@EndTime", SelectedLineUp.Until);
             DbParameter par4 = Database.AddParameter("@Stage", SelectedLineUp.stage);
-            DbParameter par5 = Database.AddParameter("@Band", SelectedLineUp.band);
+            DbParameter par5 = Database.AddParameter("@Band", SelectedLineUp.band.Id);
             try
             {
                 Database.ModifyData(SQL, par1, par2, par3, par4, par5);

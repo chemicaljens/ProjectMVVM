@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using ProjectMVVM.Model;
@@ -17,11 +18,11 @@ namespace ProjectMVVM.ViewModel
         {
             get { return "LineUP"; }
         }
-
+        private Festival fest;
         public LineUpVM()
         {
             _Stages = Stage.getStage();
-            _Bands = Band.getBand();
+            fest = Festival.getFestival();
         }
 
         private LineUp _LineUpSelected;
@@ -38,7 +39,7 @@ namespace ProjectMVVM.ViewModel
             }
 
         }
-
+       
         //property toevoegen waaraan we de list box uit de usercontrol homepage aan zullen binden.
         private ObservableCollection<LineUp> _LineUps;
         public ObservableCollection<LineUp> LineUps
@@ -50,7 +51,6 @@ namespace ProjectMVVM.ViewModel
 
             set
             {
-
                 _LineUps = value;
                 OnPropertyChanged("LineUps");
             }
@@ -62,8 +62,7 @@ namespace ProjectMVVM.ViewModel
 
                 return _StagesSelected;
             }
-            set { 
-            
+            set {                
             _StagesSelected=value;
             OnPropertyChanged("SelectedStages");
             LineUps = LineUp.getLineUp(SelectedStages);
@@ -138,7 +137,8 @@ namespace ProjectMVVM.ViewModel
 
         private void SaveStages()
         {
-            if (SelectedStages.Id != 0)
+            
+            if (SelectedStages.Id != 0 )
             { Stage.SaveStage(SelectedStages); }
             else
             {
@@ -160,8 +160,10 @@ namespace ProjectMVVM.ViewModel
         private void AddNewLineUps()
         {
             LineUp anieuw = new LineUp();
-
+            
+            anieuw.Date = fest.StarDate;
             SelectedLineUp = anieuw;
+            
             LineUps.Add(anieuw);
         }
 
@@ -196,15 +198,75 @@ namespace ProjectMVVM.ViewModel
 
         private void SaveLineUps()
         {
-            if (SelectedLineUp.Id != 0)
-            { LineUp.SaveLineUp(SelectedLineUp); }
+            Boolean errortime =false;
+            foreach (LineUp lineu in LineUps)
+                {
+                    Int32 uurf; Int32 minf; Int32 uuru; Int32 minu; Int32 uurs ;Int32 mins; Int32 uursf ; Int32 minsf;
+                    try
+                    {
+                        String[] timef = lineu.From.Split(':');
+                        uurf = Int32.Parse(timef[0]);
+                         minf = Int32.Parse(timef[1]);
+                        String[] timeu = lineu.Until.Split(':');
+                         uuru = Int32.Parse(timeu[0]);
+                         minu = Int32.Parse(timeu[1]);
+
+                        String[] times = SelectedLineUp.Until.Split(':');
+                         uurs = Int32.Parse(times[0]);
+                         mins = Int32.Parse(times[1]);
+                        String[] timesf = SelectedLineUp.From.Split(':');
+                         uursf = Int32.Parse(timesf[0]);
+                         minsf = Int32.Parse(timesf[1]);
+                    }
+                    catch (Exception)
+                    {
+                        
+                        throw;
+                    }
+                
+                    if ( (uurf<uursf && uursf<uuru) | (uursf==uurf && minf<minsf) | (uuru==uursf && minsf<minu))
+                    {
+                        MessageBox.Show("Uw start uur overlapt gelieve dit aan te passen.");
+                        errortime = true;
+                    }
+
+                    if ((uurf < uurs && uurs < uuru) | (uurs == uurf && minf > minsf) | (uuru == uursf && minsf < minu))
+                    {
+                        MessageBox.Show("Uw eind uur overlapt gelieve dit aan te passen.");
+                        errortime = true;
+                    }
+                    
+                }
+            if (SelectedLineUp.Date< fest.StarDate | SelectedLineUp.Date>fest.EndDate)
+            {
+                MessageBox.Show("gelieve een geldige datum te selecteren.");
+                errortime = true;
+            }
+
+            if (SelectedBands.Id == 0)
+            {
+                MessageBox.Show("gelieve een band te selecteren.");
+                errortime = true;
+            }
             else
             {
                 SelectedLineUp.band = SelectedBands;
-                LineUp.SaveNewLineUp(SelectedLineUp);
-                LineUps = LineUp.getLineUp(SelectedStages);
+                SelectedLineUp.stage = SelectedStages.Id;
             }
+            if (!errortime)
+            {
 
+                if (SelectedLineUp.Id != 0)
+                { LineUp.SaveLineUp(SelectedLineUp);
+                LineUps = LineUp.getLineUp(SelectedStages);
+                }
+                else
+                {
+                    SelectedLineUp.band = SelectedBands;
+                    LineUp.SaveNewLineUp(SelectedLineUp);
+                    LineUps = LineUp.getLineUp(SelectedStages);
+                }
+            }
         }
 
         private Band _BandsSelected;

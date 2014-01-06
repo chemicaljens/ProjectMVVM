@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="StagesTemp">
             <StackPanel>
-                <TextBlock Text="{Binding Name}" Margin="4"/>
+                <TextBox Text="{Binding Name}" Margin="4"/>
             </StackPanel>
 
         </DataTemplate>
@@ -45,7 +45,7 @@
 
         <Label Content="Line-up:" HorizontalAlignment="Left" Height="56" Margin="490,5,0,0" VerticalAlignment="Top" Width="106" FontSize="26.667"/>
         <Label Content="Dag:" HorizontalAlignment="Left" Height="55.8" Margin="1011.2,5.165,0,0" VerticalAlignment="Top" Width="105.6" FontSize="26.667"/>
-        <TextBox HorizontalAlignment="Left" Height="51.2" Margin="1011.2,60.965,0,0" VerticalAlignment="Top" Width="432.2" FontSize="26.667" 
+        <DatePicker HorizontalAlignment="Left" Height="51.2" Margin="1011.2,60.965,0,0" VerticalAlignment="Top" Width="432.2" FontSize="26.667" 
                  Text="{Binding SelectedLineUp.Date, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
                  />
         <ListBox HorizontalAlignment="Left" Height="249.6" Margin="1011.2,216,0,0" VerticalAlignment="Top" Width="432.2"
@@ -76,14 +76,17 @@
                  ItemsSource="{Binding LineUps}" 
                  ItemTemplate="{StaticResource LineUpTemp}"
                  SelectedItem="{Binding SelectedLineUp}"/>
-        <Button Content="toevoegen" HorizontalAlignment="Left" Height="56" Margin="10,834,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
+        <Button Content="toevoegen" HorizontalAlignment="Left" Height="56" Margin="10,834,0,0" VerticalAlignment="Top" Width="130" FontSize="26.667"
                 Command="{Binding AddNewStagesCommand}"
                 />
-        <Button Content="Verwijderen" HorizontalAlignment="Left" Height="56" Margin="276,834,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
+        <Button Content="Verwijderen" HorizontalAlignment="Left" Height="56" Margin="288,834,0,0" VerticalAlignment="Top" Width="149" FontSize="26.667"
                 Command="{Binding DeleteStagesCommand}"
                 />
         <Button Content="toevoegen" HorizontalAlignment="Left" Height="56" Margin="490,834,0,0" VerticalAlignment="Top" Width="161" FontSize="26.667"
                 Command="{Binding AddNewLineUpsCommand}"
+                />
+        <Button Content="Wijzig" HorizontalAlignment="Left" Height="56" Margin="174,834,0,0" VerticalAlignment="Top" Width="84" FontSize="26.667"
+        	Command="{Binding SaveStagesCommand}"
                 />
     </Grid>
 </UserControl>
