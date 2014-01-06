@@ -50,7 +50,9 @@
                   />
         <Label Content="Functie:" HorizontalAlignment="Left" Height="47" Margin="1130,187,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
         <Label Content="Foto:" HorizontalAlignment="Left" Height="56" Margin="1130,459,0,0" VerticalAlignment="Top" Width="235" FontSize="26.667"/>
-        <Image x:Name="imgLogo_Copy" HorizontalAlignment="Left" Height="306" Margin="1130,520,0,0" VerticalAlignment="Top" Width="306"/>
+        <Image x:Name="imgLogo_Copy" HorizontalAlignment="Left" Height="306" Margin="1130,520,0,0" VerticalAlignment="Top" Width="306"
+               Source="{Binding SelectedContactperson.foto}"
+               />
         <Label Content="Naam:" HorizontalAlignment="Left" Height="47" Margin="688,187,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
         <Label Content="Telefoon NR:" HorizontalAlignment="Left" Height="50" Margin="688,521,0,0" VerticalAlignment="Top" Width="296" FontSize="26.667"/>
         <TextBox HorizontalAlignment="Left" Height="57" Margin="688,571,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="26.667" 
